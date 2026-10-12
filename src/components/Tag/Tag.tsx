@@ -3,7 +3,7 @@ import { makeStyles, mergeClasses } from '@griffel/react';
 import { vars } from '../../theme/vars';
 import { focusRing } from '../../theme/focus';
 
-export interface TagProps {
+export interface TagProps extends Omit<React.HTMLAttributes<HTMLElement>, 'children' | 'onClick'> {
   /** Label text. */
   children: string;
   /** Renders an anchor to this URL. */
@@ -11,12 +11,11 @@ export interface TagProps {
   /** Renders a toggle button (`aria-pressed` reflects `selected`). Takes precedence over `href`. */
   onClick?: React.MouseEventHandler<HTMLElement>;
   /**
-   * Filled appearance. Announced as pressed when the tag is a button.
-   * @default false
+   * Filled appearance. When the tag is a button, setting this (true or false)
+   * also makes it a toggle announced as pressed / not pressed. Leave it
+   * undefined for a plain action button.
    */
   selected?: boolean;
-  /** Extra class name merged onto the root element. */
-  className?: string;
 }
 
 const useStyles = makeStyles({
@@ -77,24 +76,34 @@ const useStyles = makeStyles({
  * @example
  * <Tag onClick={toggle} selected={active}>Street food</Tag>
  */
-export function Tag({ children, href, onClick, selected = false, className }: TagProps) {
+export function Tag({ children, href, onClick, selected, className, ...rest }: TagProps) {
   const s = useStyles();
   const interactive = Boolean(href || onClick);
   const classes = mergeClasses(s.base, interactive && s.interactive, selected && s.selected, className);
 
   if (onClick) {
     return (
-      <button type="button" className={classes} onClick={onClick} aria-pressed={selected}>
+      <button
+        type="button"
+        className={classes}
+        onClick={onClick}
+        aria-pressed={selected === undefined ? undefined : selected}
+        {...(rest as React.ButtonHTMLAttributes<HTMLButtonElement>)}
+      >
         {children}
       </button>
     );
   }
   if (href) {
     return (
-      <a className={classes} href={href}>
+      <a className={classes} href={href} {...(rest as React.AnchorHTMLAttributes<HTMLAnchorElement>)}>
         {children}
       </a>
     );
   }
-  return <span className={classes}>{children}</span>;
+  return (
+    <span className={classes} {...rest}>
+      {children}
+    </span>
+  );
 }
