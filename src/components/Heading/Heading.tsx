@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { makeStyles, mergeClasses } from '@griffel/react';
 import { vars } from '../../theme/vars';
-import { breakpoints } from '../../theme/tokens';
+import { media } from '../../theme/media';
 
 export type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
 export type HeadingSize = 'tiny' | 'small' | 'medium' | 'large' | 'huge';
@@ -24,7 +24,7 @@ export interface HeadingProps extends Omit<React.HTMLAttributes<HTMLHeadingEleme
   caps?: boolean;
 }
 
-const fromMd = `@media (min-width: ${breakpoints.md}px)`;
+const fromMd = media({ minWidth: 600 });
 
 const useStyles = makeStyles({
   base: {

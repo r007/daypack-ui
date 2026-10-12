@@ -41,6 +41,12 @@ export const lightTokens = {
 
     uiGreen: '#44db5e',
 
+    // Map / point-of-interest categories
+    poiDefault: '#a8a9ae',
+    poiEat: '#00ca8b',
+    poiPlay: '#ffc92a',
+    poiSee: '#f8324d',
+
     // Social brands
     socialFacebook: '#3a5999',
     socialFacebookMessenger: '#1472fb',

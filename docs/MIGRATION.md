@@ -26,12 +26,20 @@ Source of truth for porting the legacy Backpack UI components (`../backpack-ui/s
 | react-router-dom | none; links take `href` / a render-prop |
 | @lonelyplanet/lp-analytics, react-recaptcha | drop (company-internal / dead) |
 
+## Conventions learned so far
+
+- **Media queries:** Griffel orders `@media` rules by string comparison, so overlapping mobile-first queries don't cascade. Use `media({ minWidth, below })` with *non-overlapping* ranges (see `Container`, `GridColumn`).
+- **Dynamic values** (e.g. grid widths): set CSS custom properties inline and reference them from a static class.
+- **Polymorphism:** no router dependency; `Link` takes `as={RouterLink}`.
+- **Icons:** named `<Name>Icon` (avoids shadowing globals such as `Map`). Generated from the legacy set; Lonely Planet and partner (Booking.com, Viator, …) brand marks were intentionally dropped.
+- **Formatting:** prices use `Intl.NumberFormat`; no moment/lodash.
+
 ## Status
 
-Done: `Avatar`, `Button`, `Heading`, `Tag`.
+Done (21): `Avatar`, `Bullet`, `Button`, `Container`, `GridRow`, `GridColumn`, `Heading`, `Icon` (139 icons), `Lede`, `Link`, `Placeholder`, `Price`, `Rating`, `Tag`, `TextHeading`, `TextSuper`, `TextBodyArticle`, `TextBodyArticleSmall`, `TextBodySmall`, `TextAccent`, `TextUppercase`, `VisuallyHidden`.
 
 Next suggested batches (dependency-free, high reuse):
-1. Primitives: `Text`, `Link`, `Icon`, `Container`, `GridRow`/`GridColumn`, `Bullet`, `Lede`, `Price`, `Rating`, `Placeholder`
+1. ~~Primitives~~ ✔
 2. Form: `Input`, `Textarea`, `Checkbox`, `Switch`, `Dropdown`, `Typeahead`
 3. Layout / content: `Card*`, `ListItem*`, `Breadcrumbs`, `Tabs`, `Accordion`, `Navigation`
 4. Overlay: `Modal`, `Dialog`, `Tooltip`, `Toast`, `Flyout`
