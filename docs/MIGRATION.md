@@ -33,6 +33,7 @@ Source of truth for porting the legacy Backpack UI components (`../backpack-ui/s
 - **Polymorphism:** no router dependency; `Link` takes `as={RouterLink}`.
 - **Icons:** named `<Name>Icon` (avoids shadowing globals such as `Map`). Generated from the legacy set; Lonely Planet and partner (Booking.com, Viator, …) brand marks were intentionally dropped.
 - **Form controls** are thin styles over native elements (`<input>`, `<select>`); the legacy fake-checkbox/`onClick({checked})` APIs became standard `onChange`.
+- **Overlays** use the Popover API / `<dialog>` where available and degrade to fixed-position elements. jsdom only exercises the fallback, so verify overlay changes in a real browser (see `Floating.tsx`).
 - **Formatting:** prices use `Intl.NumberFormat`; no moment/lodash.
 
 ## Consolidations (redesigned, not ported 1:1)
@@ -46,16 +47,19 @@ Source of truth for porting the legacy Backpack UI components (`../backpack-ui/s
 | `SectionalNav` (react-scroll + sticky node) | `SectionNav` | Real links + `position: sticky`; scroll-spy left to the app |
 | `Breadcrumbs` (hard-coded lonelyplanet.com) | `Breadcrumbs` | `<nav><ol>`, `aria-current`, optional microdata |
 | `CategoryLabel`, `SponsorLabel`, … | `Badge` | One tone-based label |
+| `Modal`, `Dialog`, `Overlay`, `Takeover`, `react-modal`, `react-portal` | `Dialog` (native `<dialog>`) | Focus trap/restore, inert page, Esc, top layer for free; `size="fullscreen"` replaces Takeover; no portal or z-index tokens |
+| `Tooltip`, `Flyout`, `react-tether`, `react-motion*` | `Tooltip` (hover/focus text), `Popover` (click panel) on the Popover API | Top layer, light dismiss, WCAG 1.4.13 (dismissible, hoverable, persistent); flip/shift positioning in ~60 lines |
+| `Toast` (props-driven) | `Toast` + `ToastProvider`/`useToast` | Live regions (`alert` vs `status`), pause-on-hover timers, AA contrast per type |
 
 ## Status
 
-Done (41): `Avatar`, `Bullet`, `Button`, `Container`, `GridRow`, `GridColumn`, `Heading`, `Icon` (139 icons), `Lede`, `Link`, `Placeholder`, `Price`, `Rating`, `Tag`, `TextHeading`, `TextSuper`, `TextBodyArticle`, `TextBodyArticleSmall`, `TextBodySmall`, `TextAccent`, `TextUppercase`, `VisuallyHidden`, `Input`, `Textarea`, `Checkbox` (also radio), `Switch`, `Dropdown`, `Badge`, `Breadcrumbs`, `Accordion`, `Tabs`, `SectionNav`, `Card*`, `ListItem*`.
+Done (46): `Avatar`, `Bullet`, `Button`, `Container`, `GridRow`, `GridColumn`, `Heading`, `Icon` (139 icons), `Lede`, `Link`, `Placeholder`, `Price`, `Rating`, `Tag`, `TextHeading`, `TextSuper`, `TextBodyArticle`, `TextBodyArticleSmall`, `TextBodySmall`, `TextAccent`, `TextUppercase`, `VisuallyHidden`, `Input`, `Textarea`, `Checkbox` (also radio), `Switch`, `Dropdown`, `Badge`, `Breadcrumbs`, `Accordion`, `Tabs`, `SectionNav`, `Card*`, `ListItem*`, `Dialog`, `Tooltip`, `Popover`, `Toast` (+ `ToastProvider`/`useToast`).
 
 Next suggested batches (dependency-free, high reuse):
 1. ~~Primitives~~ ✔
 2. ~~Form~~ ✔ except `Typeahead` (845 lines, tokenizer + combobox; needs a deliberate ARIA combobox rewrite) and the `SettingBlock*` family
 3. ~~Layout / content~~ ✔ (see "Consolidations" below). Remaining: `ArticlePreview`, `Callout*`, `ContentBlock`, `PageHeader`, `ProfileHeader`, `Masthead`, `Toolbar`, `Flyout` …
-4. Overlay: `Modal`, `Dialog`, `Tooltip`, `Toast`, `Flyout`
+4. ~~Overlay~~ ✔ — see "Consolidations". `ModalContent*` (login/magic-link forms) were app-specific and are intentionally not ported
 5. Heavy / third-party: carousels, galleries, maps, calendars, video
 
 Everything else: see the legacy `src/components` directory listing.
