@@ -12,6 +12,11 @@ interface LinkOwnProps<C extends React.ElementType> {
    * depending on any router.
    */
   as?: C;
+  /**
+   * `plain` inherits color; `blue` is the standard hyperlink; `underlined`
+   * draws a soft underline that breaks around descenders.
+   * @default 'plain'
+   */
   variant?: LinkVariant;
   className?: string;
 }
@@ -25,7 +30,14 @@ const useStyles = makeStyles({
   underlined: underlinedLink,
 });
 
-/** Anchor with the design's link treatments. */
+/**
+ * Anchor with the design's link treatments. All other props are passed to the
+ * rendered element (`href`, `target`, `to` for router links, …).
+ *
+ * @example
+ * <Link href="/guide" variant="blue">Read the guide</Link>
+ * <Link as={RouterLink} to="/guide" variant="underlined">Read the guide</Link>
+ */
 export function Link<C extends React.ElementType = 'a'>({
   as,
   variant = 'plain',

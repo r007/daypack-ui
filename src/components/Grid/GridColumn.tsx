@@ -7,20 +7,33 @@ export type ColumnCount = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 export type ColumnShift = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
 
 export interface GridColumnProps extends React.HTMLAttributes<HTMLDivElement> {
-  /** Use percentages (fluid) instead of pixel widths. */
+  /**
+   * Use percentages instead of pixel widths so the column scales with its parent.
+   * @default false
+   */
   fluid?: boolean;
-  /** Column span from 480px. */
+  /** Column span (1–12) from 480px up. Below 480px columns are full width. */
   sm?: ColumnCount;
-  /** Left offset in columns from 480px. */
+  /** Left offset in columns (0–11) from 480px up. */
   smShift?: ColumnShift;
-  /** Column span from 768px. */
+  /** Column span (1–12) from 768px up. Inherits `sm` when omitted. */
   md?: ColumnCount;
+  /** Left offset in columns from 768px up. Inherits `smShift` when omitted. */
   mdShift?: ColumnShift;
-  /** Column span from 1024px. */
+  /** Column span (1–12) from 1024px up. Inherits `md` when omitted. */
   lg?: ColumnCount;
+  /** Left offset in columns from 1024px up. Inherits `mdShift` when omitted. */
   lgShift?: ColumnShift;
-  /** Add a gutter next to the column (not applied to full-width, 12 column spans). */
+  /**
+   * Add a 30px gutter next to the column. Ignored for 12-column spans. Leave
+   * it off the first column in a row so the row fills exactly.
+   * @default false
+   */
   includeGutter?: boolean;
+  /**
+   * Which side the gutter goes on when `includeGutter` is set.
+   * @default 'before'
+   */
   gutterPosition?: 'before' | 'after';
 }
 
@@ -86,7 +99,11 @@ const useStyles = makeStyles({
   lgRight: { [media({ minWidth: 1024 })]: { marginRight: 'var(--dp-col-lg-mr)' } },
 });
 
-/** A column in a 12-column responsive grid. Use inside <GridRow>. */
+/**
+ * A column in a 12-column responsive grid (80px columns, 30px gutters,
+ * 1290px wide). Breakpoints are mobile-first: a value applies from its
+ * breakpoint upward until a larger one overrides it. Use inside `GridRow`.
+ */
 export const GridColumn = React.forwardRef<HTMLDivElement, GridColumnProps>(function GridColumn(
   { fluid, sm, smShift, md, mdShift, lg, lgShift, includeGutter, gutterPosition, className, style, ...rest },
   ref,

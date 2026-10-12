@@ -29,14 +29,29 @@ const useStyles = makeStyles({
 type WithClass<T> = Omit<T, 'color'>;
 
 export interface TextHeadingProps extends WithClass<React.HTMLAttributes<HTMLHeadingElement>> {
-  /** Semantic level (`<h1>`–`<h6>`). */
+  /**
+   * Semantic level (`<h1>`–`<h6>`). Choose by document outline.
+   * @default 2
+   */
   level?: 1 | 2 | 3 | 4 | 5 | 6;
-  /** Visual size from the type scale, independent of `level`. */
+  /**
+   * Visual size from the 8-step type scale (1 = 64px … 8 = 11px), independent of `level`.
+   * @default 2
+   */
   size?: HeadingScale;
+  /**
+   * Font weight token.
+   * @default 'regular'
+   */
   weight?: FontWeightName;
 }
 
-/** Heading set on the design's 8-step type scale. */
+/**
+ * Heading set on the design's 8-step type scale. Accepts all heading attributes.
+ *
+ * @example
+ * <TextHeading level={2} size={4} weight="light">Sleep</TextHeading>
+ */
 export const TextHeading = React.forwardRef<HTMLHeadingElement, TextHeadingProps>(
   function TextHeading({ level = 2, size = 2, weight = 'regular', className, ...rest }, ref) {
     const s = useStyles();
@@ -51,7 +66,7 @@ export const TextHeading = React.forwardRef<HTMLHeadingElement, TextHeadingProps
   },
 );
 
-/** Oversized display heading (`<h1>`). */
+/** Oversized 88px display heading, rendered as `<h1>`. Accepts all heading attributes. */
 export const TextSuper = React.forwardRef<HTMLHeadingElement, WithClass<React.HTMLAttributes<HTMLHeadingElement>>>(
   function TextSuper({ className, ...rest }, ref) {
     const s = useStyles();

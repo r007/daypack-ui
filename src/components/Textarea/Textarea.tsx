@@ -3,11 +3,20 @@ import { makeStyles, mergeClasses } from '@griffel/react';
 import { useFieldStyles } from '../Input';
 
 export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
-  /** Grow with the content, up to `maxLines`. */
+  /**
+   * Grow with the content, up to `maxLines`, instead of showing a resize handle.
+   * @default false
+   */
   autoGrow?: boolean;
-  /** Maximum number of lines when `autoGrow` is on. */
+  /**
+   * Maximum number of lines before scrolling; only used when `autoGrow` is on.
+   * @default 3
+   */
   maxLines?: number;
-  /** Ignore the Enter key (e.g. for single-paragraph fields). */
+  /**
+   * Ignore the Enter key, e.g. for single-paragraph fields. Pasted line breaks are still accepted.
+   * @default false
+   */
   disableEnter?: boolean;
 }
 
@@ -19,7 +28,10 @@ const useStyles = makeStyles({
   grow: { resize: 'none', overflowY: 'hidden' },
 });
 
-/** Multi-line field; optionally grows with its content. */
+/**
+ * Multi-line field; optionally grows with its content. Accepts every native
+ * `<textarea>` attribute and forwards its `ref`.
+ */
 export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(function Textarea(
   { autoGrow = false, maxLines = 3, disableEnter = false, className, onInput, onKeyDown, ...rest },
   forwardedRef,

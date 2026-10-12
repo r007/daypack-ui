@@ -2,6 +2,11 @@ import * as React from 'react';
 import { makeStyles, mergeClasses } from '@griffel/react';
 import { vars } from '../../theme/vars';
 
+/**
+ * Accepts every native `<input>` attribute (`type`, `value`, `onChange`,
+ * `placeholder`, `required`, `aria-*`, …). Pair it with a visible `<label>`
+ * or an `aria-label`.
+ */
 export type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
 
 /** Shared "underlined field" look, reused by Textarea. */
@@ -36,7 +41,13 @@ export const useFieldStyles = makeStyles({
   },
 });
 
-/** Text field with the design's underline style. Accepts every native `<input>` attribute. */
+/**
+ * Text field with the design's underline style. Forwards its `ref` to the
+ * `<input>`; `type` defaults to `"text"`.
+ *
+ * @example
+ * <label>Email <Input type="email" required /></label>
+ */
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(function Input(
   { type = 'text', className, ...rest },
   ref,

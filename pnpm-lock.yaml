@@ -11,6 +11,9 @@ importers:
       '@griffel/react':
         specifier: ^1.7.8
         version: 1.7.8(react@19.3.0)
+      '@griffel/sort-css-queries':
+        specifier: ^1.0.2
+        version: 1.0.2
     devDependencies:
       '@eslint/js':
         specifier: ^10.0.1
@@ -441,6 +444,9 @@ packages:
     resolution: {integrity: sha512-kTegyzZoRqpRNUQ8Fd6QWLC8MUqSyO+/GDC/ffbEG8Y6JDole98rBrOVA/NN9PDD61/ktsd2UqtsTNwtAG6q3w==}
     peerDependencies:
       react: '>=16.14.0 <20.0.0'
+
+  '@griffel/sort-css-queries@1.0.2':
+    resolution: {integrity: sha512-WNl7v7VlTqBO3ukx0SkHrcMh5QcfKkkvO8iD04mHxiQE5sXSpJfPlwe8dMtssb5kDbKJ+nVoG7znltD7L+kWHw==}
 
   '@griffel/style-types@1.4.3':
     resolution: {integrity: sha512-sFxMK19oFUPQSmyCKT1Pvj5Nu/ODvhMczqhGjVAoksDTXUj1za40WA0CXqV3o+xxKWPec+K/rbS78jJLmomsQA==}
@@ -2502,6 +2508,10 @@ snapshots:
     dependencies:
       '@griffel/core': 1.21.4
       react: 19.3.0
+      tslib: 2.8.1
+
+  '@griffel/sort-css-queries@1.0.2':
+    dependencies:
       tslib: 2.8.1
 
   '@griffel/style-types@1.4.3':

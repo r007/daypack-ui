@@ -18,11 +18,17 @@ import {
 export interface RatingProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Rating value from 0 to 5. Half steps render as an icon; other values fall back to text. */
   amount?: number;
-  /** Maximum value, shown as "out of N" in text mode. */
+  /**
+   * Maximum value, shown as "out of N" in text mode.
+   * @default 5
+   */
   max?: number;
-  /** A word describing the rating: "excellent", "poor"… */
+  /** A word describing the rating: "excellent", "poor"… (text mode). */
   description?: string;
-  /** Show five circles instead of text. */
+  /**
+   * Show five circles instead of text. Only whole and half values 0–5 have an icon.
+   * @default false
+   */
   icon?: boolean;
 }
 

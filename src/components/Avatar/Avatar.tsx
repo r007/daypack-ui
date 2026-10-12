@@ -5,15 +5,25 @@ import { focusRing } from '../../theme/focus';
 export type AvatarSize = 24 | 40 | 48 | 80 | 104;
 
 export interface AvatarProps {
+  /** Image URL. */
   src: string;
-  /** Describe the person; leave empty when the name is rendered next to the avatar. */
+  /**
+   * Describe the person; leave empty when the name is rendered next to the avatar.
+   * With `href`, the alt text becomes the link's accessible name, so it should not be empty.
+   * @default ''
+   */
   alt?: string;
-  /** Diameter in px. */
+  /**
+   * Diameter in px.
+   * @default 80
+   */
   size?: AvatarSize;
-  /** Wraps the image in a link. */
+  /** Wraps the image in a link to this URL. */
   href?: string;
+  /** Applied to the outermost element. */
   id?: string;
   className?: string;
+  /** Merged over the width/height set by `size`. */
   style?: React.CSSProperties;
 }
 

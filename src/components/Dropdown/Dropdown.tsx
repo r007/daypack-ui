@@ -6,8 +6,12 @@ import { focusRing } from '../../theme/focus';
 export type DropdownOption = string | { value: string; label: string; disabled?: boolean };
 
 export interface DropdownProps extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, 'size' | 'children'> {
-  /** Plain strings, or `{ value, label }` objects. */
+  /**
+   * Plain strings (used as both value and label) or `{ value, label, disabled? }` objects.
+   * Values must be unique.
+   */
   options: DropdownOption[];
+  /** `small` uses 11px semibold text. Omit for the default 13px. */
   size?: 'small';
 }
 
@@ -44,7 +48,14 @@ const useStyles = makeStyles({
   small: { fontSize: '11px', fontWeight: 600 },
 });
 
-/** Styled native `<select>`. */
+/**
+ * Styled native `<select>`: full keyboard, mobile picker and form support.
+ * Accepts every `<select>` attribute (`value`/`defaultValue`, `onChange`, `name`, …).
+ * Provide a visible label or `aria-label`.
+ *
+ * @example
+ * <Dropdown aria-label="Sort by" options={['Popular', { value: 'new', label: 'Newest' }]} />
+ */
 export const Dropdown = React.forwardRef<HTMLSelectElement, DropdownProps>(function Dropdown(
   { options, size, className, ...rest },
   ref,

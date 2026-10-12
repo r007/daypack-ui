@@ -7,10 +7,14 @@ export interface PlaceholderProps extends Omit<React.HTMLAttributes<HTMLDivEleme
   title: string;
   /** Fixed width in px. Use together with `height`. */
   width?: number;
+  /** Fixed height in px. Use together with `width`. */
   height?: number;
-  /** Height ÷ width for a fluid box, e.g. `9 / 16`. */
+  /** Height ÷ width for a fluid, full-width box, e.g. `9 / 16`. Ignored when `width` and `height` are set. */
   aspectRatio?: number;
-  /** Letter size in px. */
+  /**
+   * Letter size in px.
+   * @default 26
+   */
   fontSize?: number;
 }
 

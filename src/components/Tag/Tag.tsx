@@ -4,13 +4,18 @@ import { vars } from '../../theme/vars';
 import { focusRing } from '../../theme/focus';
 
 export interface TagProps {
+  /** Label text. */
   children: string;
-  /** Renders an anchor. */
+  /** Renders an anchor to this URL. */
   href?: string;
-  /** Renders a button. Takes precedence over `href`. */
+  /** Renders a toggle button (`aria-pressed` reflects `selected`). Takes precedence over `href`. */
   onClick?: React.MouseEventHandler<HTMLElement>;
-  /** Filled/selected appearance. */
+  /**
+   * Filled appearance. Announced as pressed when the tag is a button.
+   * @default false
+   */
   selected?: boolean;
+  /** Extra class name merged onto the root element. */
   className?: string;
 }
 
@@ -65,7 +70,13 @@ const useStyles = makeStyles({
   },
 });
 
-/** Compact pill used for filters and topic labels. */
+/**
+ * Compact pill used for filters and topic labels. Static `<span>` by default,
+ * a link with `href`, or a toggle button with `onClick`.
+ *
+ * @example
+ * <Tag onClick={toggle} selected={active}>Street food</Tag>
+ */
 export function Tag({ children, href, onClick, selected = false, className }: TagProps) {
   const s = useStyles();
   const interactive = Boolean(href || onClick);

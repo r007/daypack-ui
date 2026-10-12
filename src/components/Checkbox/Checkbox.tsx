@@ -4,14 +4,27 @@ import { vars } from '../../theme/vars';
 import { focusRing } from '../../theme/focus';
 
 export interface CheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'type'> {
-  /** Visible label. Without one, provide `aria-label`. */
+  /** Visible label, clickable like any `<label>`. Without one, provide `aria-label`. */
   label?: React.ReactNode;
-  /** Box size in px. */
+  /**
+   * Box size in px.
+   * @default 16
+   */
   size?: 16 | 24 | 32;
-  /** Round box; combine with `type="radio"` for radio buttons. */
+  /**
+   * Round box; combine with `type="radio"` for radio buttons.
+   * @default false
+   */
   rounded?: boolean;
+  /**
+   * Native input type. Radios sharing a `name` behave as a group.
+   * @default 'checkbox'
+   */
   type?: 'checkbox' | 'radio';
-  /** Hide the box border while unchecked. */
+  /**
+   * Hide the box border while unchecked.
+   * @default false
+   */
   removeBorder?: boolean;
 }
 
@@ -81,7 +94,14 @@ const useStyles = makeStyles({
   rounded: { borderRadius: '100%' },
 });
 
-/** Native checkbox or radio input with the design's custom box. */
+/**
+ * Native checkbox or radio input with the design's custom box. Works
+ * controlled (`checked` + `onChange`) or uncontrolled (`defaultChecked`);
+ * every other `<input>` attribute is forwarded.
+ *
+ * @example
+ * <Checkbox label="Subscribe to updates" defaultChecked onChange={(e) => save(e.target.checked)} />
+ */
 export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(function Checkbox(
   { label, size = 16, rounded = false, removeBorder = false, type = 'checkbox', className, style, disabled, ...rest },
   ref,

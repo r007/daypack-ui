@@ -35,14 +35,26 @@ Source of truth for porting the legacy Backpack UI components (`../backpack-ui/s
 - **Form controls** are thin styles over native elements (`<input>`, `<select>`); the legacy fake-checkbox/`onClick({checked})` APIs became standard `onChange`.
 - **Formatting:** prices use `Intl.NumberFormat`; no moment/lodash.
 
+## Consolidations (redesigned, not ported 1:1)
+
+| Legacy | daypack | Why |
+| --- | --- | --- |
+| `Card`, `CardBasic`, `CardBook`, `CardPrice`, `CardShelf*`, `CardVideo` (8 variants) | `Card` + `CardMedia`/`CardBody`/`CardTitle`/`CardText`/`CardMeta`/`CardActions` | Composition replaces variant props; one stretched link instead of 2–3 duplicate tab stops; hover state via CSS custom properties, no `<Style>` hacks |
+| `ListItem`, `ListItemBookable`, `ListItemBookmark`, `ListItemImage`, `ListItemThumbnail` | `ListItem` + `ListItemMedia`/`Body`/`Title`/`Text`/`Actions` | Legacy was POI-specific (slug, DFP ad, place shape); the new one is generic |
+| `Accordion` (`role=tablist` misuse) | `Accordion`/`AccordionItem` | Real disclosure pattern: `aria-expanded`, regions, arrow-key header navigation, CSS-only animation |
+| `Tabs`, `Tab`, `TabPanel`, `Navigation`, `NavigationTab`, `TabbedNav` | `Tabs`/`TabList`/`Tab`/`TabPanel` | WAI-ARIA tabs: roving tabindex, arrow keys, automatic activation |
+| `SectionalNav` (react-scroll + sticky node) | `SectionNav` | Real links + `position: sticky`; scroll-spy left to the app |
+| `Breadcrumbs` (hard-coded lonelyplanet.com) | `Breadcrumbs` | `<nav><ol>`, `aria-current`, optional microdata |
+| `CategoryLabel`, `SponsorLabel`, … | `Badge` | One tone-based label |
+
 ## Status
 
-Done (26): `Avatar`, `Bullet`, `Button`, `Container`, `GridRow`, `GridColumn`, `Heading`, `Icon` (139 icons), `Lede`, `Link`, `Placeholder`, `Price`, `Rating`, `Tag`, `TextHeading`, `TextSuper`, `TextBodyArticle`, `TextBodyArticleSmall`, `TextBodySmall`, `TextAccent`, `TextUppercase`, `VisuallyHidden`, `Input`, `Textarea`, `Checkbox` (also radio), `Switch`, `Dropdown`.
+Done (41): `Avatar`, `Bullet`, `Button`, `Container`, `GridRow`, `GridColumn`, `Heading`, `Icon` (139 icons), `Lede`, `Link`, `Placeholder`, `Price`, `Rating`, `Tag`, `TextHeading`, `TextSuper`, `TextBodyArticle`, `TextBodyArticleSmall`, `TextBodySmall`, `TextAccent`, `TextUppercase`, `VisuallyHidden`, `Input`, `Textarea`, `Checkbox` (also radio), `Switch`, `Dropdown`, `Badge`, `Breadcrumbs`, `Accordion`, `Tabs`, `SectionNav`, `Card*`, `ListItem*`.
 
 Next suggested batches (dependency-free, high reuse):
 1. ~~Primitives~~ ✔
 2. ~~Form~~ ✔ except `Typeahead` (845 lines, tokenizer + combobox; needs a deliberate ARIA combobox rewrite) and the `SettingBlock*` family
-3. Layout / content: `Card*`, `ListItem*`, `Breadcrumbs`, `Tabs`, `Accordion`, `Navigation`
+3. ~~Layout / content~~ ✔ (see "Consolidations" below). Remaining: `ArticlePreview`, `Callout*`, `ContentBlock`, `PageHeader`, `ProfileHeader`, `Masthead`, `Toolbar`, `Flyout` …
 4. Overlay: `Modal`, `Dialog`, `Tooltip`, `Toast`, `Flyout`
 5. Heavy / third-party: carousels, galleries, maps, calendars, video
 

@@ -7,17 +7,31 @@ export type ButtonColor = 'blue' | 'white' | 'gray' | 'red' | 'transparent';
 export type ButtonSize = 'tiny' | 'small' | 'medium' | 'large' | 'huge';
 
 interface ButtonOwnProps {
-  /** Visual color scheme. */
+  /**
+   * Visual color scheme. `transparent` is for use on photos or dark surfaces.
+   * @default 'blue'
+   */
   color?: ButtonColor;
   /**
    * `tiny` 30px · `small` 44px · `medium` 60px · `large` 66px · `huge` 72px tall.
+   * @default 'medium'
    */
   size?: ButtonSize;
-  /** Pill-shaped corners. */
+  /**
+   * Pill-shaped corners.
+   * @default false
+   */
   rounded?: boolean;
-  /** Stretch to the available width. */
+  /**
+   * Stretch to the available width (renders as a block element).
+   * @default false
+   */
   full?: boolean;
-  /** Draw the 1px inset border (always on for `gray`, `white`, `red`, `transparent` in the original design when requested). */
+  /**
+   * Draw a 1px inset outline in the button's accent color. Has no effect on
+   * `blue`, which has no outline in the design.
+   * @default false
+   */
   border?: boolean;
 }
 
@@ -122,8 +136,15 @@ const useStyles = makeStyles({
 });
 
 /**
- * Call-to-action button. Renders an `<a role="button">` when `href` is given,
- * otherwise a `<button>`.
+ * Call-to-action button.
+ *
+ * Renders an `<a role="button">` when `href` is given, otherwise a native
+ * `<button type="button">`. Accepts every attribute of the element it renders
+ * (`onClick`, `disabled`, `target`, `aria-*`, …) and forwards its `ref`.
+ *
+ * @example
+ * <Button color="red" size="large" rounded onClick={book}>Book now</Button>
+ * <Button href="/trips" color="white" border>All trips</Button>
  */
 export const Button = React.forwardRef<HTMLElement, ButtonProps>(function Button(
   {

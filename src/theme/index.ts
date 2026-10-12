@@ -9,3 +9,4 @@ export { typography } from './typography';
 export type { FontWeightName, HeadingScale } from './typography';
 export { visuallyHidden, blueLink, underlinedLink } from './mixins';
 export { focusRing } from './focus';
+export { createRenderer } from './renderer';

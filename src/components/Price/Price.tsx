@@ -7,22 +7,43 @@ import { Bullet } from '../Bullet';
 export interface PriceProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Price amount (rounded to whole units for display). */
   amount: number | string;
-  /** If set, replaces `amount` as the displayed price and `amount` is shown as the old price. */
+  /**
+   * Sale price. When greater than 0 it is displayed and `amount` is shown as
+   * the old price (in `card` and `booking` contexts).
+   */
   discountedAmount?: number | string;
   /** Unit of the price, e.g. "per night". */
   rate?: string;
-  /** ISO 4217 code. */
+  /**
+   * ISO 4217 currency code, formatted with `Intl.NumberFormat` using the narrow symbol.
+   * @default 'USD'
+   */
   currency?: string;
-  /** BCP 47 locale used to format the amount. */
+  /**
+   * BCP 47 locale used to format the amount.
+   * @default 'en-US'
+   */
   locale?: string;
-  /** Large, red price with a raised currency symbol. */
+  /**
+   * Large red price with a raised currency symbol.
+   * @default false
+   */
   emphasized?: boolean;
-  /** Lighter, slightly larger weight. */
+  /**
+   * Lighter weight and slightly larger size.
+   * @default false
+   */
   thin?: boolean;
-  /** Filled red tag appearance. */
+  /**
+   * Filled red tag appearance.
+   * @default false
+   */
   tag?: boolean;
-  /** Layout context the price is rendered in. */
+  /**
+   * Layout the price sits in; adjusts the rate position and the sale presentation.
+   */
   parent?: 'booking' | 'listItem' | 'card';
+  /** With `parent="booking"`, `partnerActivity` prefixes the price with "From". */
   poiType?: 'poi' | 'hotel' | 'partnerActivity';
 }
 

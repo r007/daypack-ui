@@ -1,7 +1,10 @@
 export interface BulletProps {
-  /** Non-breaking space placed around the bullet. */
+  /**
+   * Where to put a non-breaking space so the bullet doesn't wrap away from its neighbours.
+   * @default 'none'
+   */
   space?: 'none' | 'before' | 'after' | 'both';
-  /** CSS color; inherits by default. */
+  /** Any CSS color; inherits from the surrounding text by default. */
   color?: string;
 }
 

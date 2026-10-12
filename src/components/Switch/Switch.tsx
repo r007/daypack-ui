@@ -3,6 +3,11 @@ import { makeStyles, mergeClasses } from '@griffel/react';
 import { vars } from '../../theme/vars';
 import { focusRing } from '../../theme/focus';
 
+/**
+ * Accepts every native checkbox `<input>` attribute (`checked`, `defaultChecked`,
+ * `onChange`, `disabled`, `name`, `aria-label`, …). There is no visible label
+ * built in: wrap it in a `<label>` or provide `aria-label`.
+ */
 export type SwitchProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type' | 'size'>;
 
 const SIZE = 32;
@@ -54,7 +59,13 @@ const useStyles = makeStyles({
   },
 });
 
-/** Toggle switch built on a native checkbox (`role="switch"`). */
+/**
+ * Toggle switch built on a native checkbox (`role="switch"`), so it submits
+ * with forms and responds to Space.
+ *
+ * @example
+ * <Switch aria-label="Email alerts" checked={on} onChange={(e) => setOn(e.target.checked)} />
+ */
 export const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(function Switch(
   { className, ...rest },
   ref,

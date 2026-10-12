@@ -23,7 +23,10 @@ const useStyles = makeStyles({
   },
 });
 
-/** Centered, max-width page container with responsive side gutters. */
+/**
+ * Centered page container, max 1290px wide, with side gutters that grow with
+ * the viewport (15px → 30px → 60px). Accepts all `<div>` attributes.
+ */
 export const Container = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   function Container({ className, ...rest }, ref) {
     const s = useStyles();

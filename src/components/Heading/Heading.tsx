@@ -10,17 +10,40 @@ export type HeadingImportance = 'low' | 'normal' | 'high' | 'alert';
 export type HeadingTracking = 'tight' | 'normal' | 'loose';
 
 export interface HeadingProps extends Omit<React.HTMLAttributes<HTMLHeadingElement>, 'color'> {
-  /** Semantic level; renders `<h1>`–`<h6>`. */
+  /**
+   * Semantic level; renders `<h1>`–`<h6>`. Choose by document outline, not looks.
+   * @default 2
+   */
   level?: HeadingLevel;
-  /** Visual size, independent of the semantic level. */
+  /**
+   * Visual size, independent of the semantic level.
+   * @default 'medium'
+   */
   size?: HeadingSize;
+  /**
+   * `extraThin` and `thin` are both light (300); `normal` is 500; `thick` is 600.
+   * @default 'normal'
+   */
   weight?: HeadingWeight;
-  /** Color changes with importance. */
+  /**
+   * Color by importance: `low` is faded, `alert` is red.
+   * @default 'normal'
+   */
   importance?: HeadingImportance;
+  /**
+   * Letter spacing.
+   * @default 'normal'
+   */
   tracking?: HeadingTracking;
-  /** Clip overflow with an ellipsis on a single line. */
+  /**
+   * Clip overflow with an ellipsis on a single line.
+   * @default false
+   */
   truncate?: boolean;
-  /** Set in all caps. */
+  /**
+   * Set in all caps.
+   * @default false
+   */
   caps?: boolean;
 }
 
@@ -64,6 +87,13 @@ const useStyles = makeStyles({
   caps: { textTransform: 'uppercase' },
 });
 
+/**
+ * Responsive display heading with five named sizes. For the 8-step article
+ * type scale use `TextHeading` instead.
+ *
+ * @example
+ * <Heading level={1} size="huge">Where to next?</Heading>
+ */
 export function Heading({
   level = 2,
   size = 'medium',

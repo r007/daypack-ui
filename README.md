@@ -33,9 +33,22 @@ All design tokens (colors, fonts, type scale, spacing, motion, z-index) are expo
 
 The original design used the commercial typefaces Benton Sans and Miller Daily, which are not included. The default stack is a system sans/serif; set `font.sans` / `font.serif` in a theme to supply your own.
 
+### Authoring your own responsive styles
+
+Griffel's default renderer orders `@media` rules by string comparison, so `(min-width: 1024px)` is emitted *before* `(min-width: 480px)` and overlapping mobile-first queries don't cascade. daypack components avoid the problem with non-overlapping ranges, but if you write your own, use the bundled renderer:
+
+```tsx
+import { RendererProvider } from '@griffel/react';
+import { createRenderer } from 'daypack-ui';
+
+const renderer = createRenderer(document);
+<RendererProvider renderer={renderer} targetDocument={document}>…</RendererProvider>
+```
+
 ## Differences from Backpack UI
 
-- TypeScript, typed props instead of `propTypes`.
+- TypeScript, typed and documented props instead of `propTypes`.
+- Variant-heavy components are consolidated into composable parts (`Card`, `ListItem`, `Tabs`, …) with accessible patterns; see [docs/MIGRATION.md](docs/MIGRATION.md).
 - Griffel instead of Radium; the `customStyles` / `style`-array props are replaced by `className` (and `style` where sensible).
 - Focus uses a visible `:focus-visible` ring instead of a dotted outline.
 - Dropped jQuery, Moment, lodash, `react-router` coupling and other legacy dependencies; each ported component documents any remaining third-party dependency.
