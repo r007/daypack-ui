@@ -14,3 +14,8 @@ export * from './components/Price';
 export * from './components/Rating';
 export * from './components/Text';
 export * from './components/VisuallyHidden';
+export * from './components/Checkbox';
+export * from './components/Dropdown';
+export * from './components/Input';
+export * from './components/Switch';
+export * from './components/Textarea';

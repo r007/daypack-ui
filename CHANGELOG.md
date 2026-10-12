@@ -9,7 +9,7 @@ All notable changes to this project are documented here. The format follows
 ### Added
 - Project foundations: Vite library build, TypeScript, Griffel, Vitest, Storybook, GitHub Actions (CI + Pages).
 - Design tokens and CSS-variable theming (`vars`, `ThemeProvider`).
-- Components: `Button`, `Heading`, `Tag`, `Avatar`, `Icon` (139 icons), `Text*`, `Link`, `Container`, `GridRow`/`GridColumn`, `Bullet`, `Lede`, `Placeholder`, `Price`, `Rating`, `VisuallyHidden`.
+- Components: `Button`, `Heading`, `Tag`, `Avatar`, `Icon` (139 icons), `Text*`, `Link`, `Container`, `GridRow`/`GridColumn`, `Bullet`, `Lede`, `Placeholder`, `Price`, `Rating`, `VisuallyHidden`, `Input`, `Textarea`, `Checkbox`, `Switch`, `Dropdown`.
 - Style utilities: `typography`, `media`, `blueLink`, `underlinedLink`, `visuallyHidden`, `focusRing`.
 
 ### Notes

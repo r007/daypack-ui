@@ -32,15 +32,16 @@ Source of truth for porting the legacy Backpack UI components (`../backpack-ui/s
 - **Dynamic values** (e.g. grid widths): set CSS custom properties inline and reference them from a static class.
 - **Polymorphism:** no router dependency; `Link` takes `as={RouterLink}`.
 - **Icons:** named `<Name>Icon` (avoids shadowing globals such as `Map`). Generated from the legacy set; Lonely Planet and partner (Booking.com, Viator, …) brand marks were intentionally dropped.
+- **Form controls** are thin styles over native elements (`<input>`, `<select>`); the legacy fake-checkbox/`onClick({checked})` APIs became standard `onChange`.
 - **Formatting:** prices use `Intl.NumberFormat`; no moment/lodash.
 
 ## Status
 
-Done (21): `Avatar`, `Bullet`, `Button`, `Container`, `GridRow`, `GridColumn`, `Heading`, `Icon` (139 icons), `Lede`, `Link`, `Placeholder`, `Price`, `Rating`, `Tag`, `TextHeading`, `TextSuper`, `TextBodyArticle`, `TextBodyArticleSmall`, `TextBodySmall`, `TextAccent`, `TextUppercase`, `VisuallyHidden`.
+Done (26): `Avatar`, `Bullet`, `Button`, `Container`, `GridRow`, `GridColumn`, `Heading`, `Icon` (139 icons), `Lede`, `Link`, `Placeholder`, `Price`, `Rating`, `Tag`, `TextHeading`, `TextSuper`, `TextBodyArticle`, `TextBodyArticleSmall`, `TextBodySmall`, `TextAccent`, `TextUppercase`, `VisuallyHidden`, `Input`, `Textarea`, `Checkbox` (also radio), `Switch`, `Dropdown`.
 
 Next suggested batches (dependency-free, high reuse):
 1. ~~Primitives~~ ✔
-2. Form: `Input`, `Textarea`, `Checkbox`, `Switch`, `Dropdown`, `Typeahead`
+2. ~~Form~~ ✔ except `Typeahead` (845 lines, tokenizer + combobox; needs a deliberate ARIA combobox rewrite) and the `SettingBlock*` family
 3. Layout / content: `Card*`, `ListItem*`, `Breadcrumbs`, `Tabs`, `Accordion`, `Navigation`
 4. Overlay: `Modal`, `Dialog`, `Tooltip`, `Toast`, `Flyout`
 5. Heavy / third-party: carousels, galleries, maps, calendars, video
