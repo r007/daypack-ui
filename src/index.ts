@@ -51,3 +51,6 @@ export * from './components/PhotoGallery';
 export * from './components/ScrollIndicator';
 export * from './components/TileGrid';
 export * from './components/Video';
+export * from './components/BookmarkButton';
+export * from './components/Share';
+export * from './components/SocialLoginButton';
