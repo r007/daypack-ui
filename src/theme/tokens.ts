@@ -14,8 +14,9 @@ export const lightTokens = {
     bgMap: '#f1f4f6',
 
     // Links
-    linkPrimary: '#297cbb',
-    linkPrimaryHover: 'rgba(41, 124, 187, 0.7)',
+    // Original was #297cbb (4.47:1 on white). Nudged darker to clear WCAG AA (4.5:1) for text and white-on-blue buttons.
+    linkPrimary: '#2979b7',
+    linkPrimaryHover: 'rgba(41, 121, 183, 0.7)',
 
     // Borders
     borderPrimary: '#e4e4e4',

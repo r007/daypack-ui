@@ -86,7 +86,7 @@ const useStyles = makeStyles({
 
   bullet: { [fromMd]: { display: 'none' } },
 
-  from: { color: vars.color.accentGray, fontWeight: 400, marginBottom: '7px' },
+  from: { color: vars.color.textLight, fontWeight: 400, marginBottom: '7px' },
   onSale: {
     [belowMd]: { paddingTop: '14px', textAlign: 'center' },
     [fromMd]: {
@@ -97,10 +97,10 @@ const useStyles = makeStyles({
       textAlign: 'right',
     },
   },
-  oldPrice: { color: vars.color.accentGray, paddingTop: '4px' },
+  oldPrice: { color: vars.color.textLight, paddingTop: '4px' },
 
   cardWas: {
-    color: vars.color.accentGray,
+    color: vars.color.textLight,
     fontSize: '11px',
     marginBottom: '8px',
     marginLeft: '5px',

@@ -40,6 +40,11 @@ describe('IconButton', () => {
     expect(screen.getByRole('button', { name: 'Save' })).toHaveAttribute('aria-pressed', 'true');
   });
 
+  it('shows a caption without changing its accessible name', () => {
+    render(<IconButton icon={<BookmarkIcon />} label="Save to trip" caption="Save" />);
+    expect(screen.getByRole('button', { name: 'Save to trip' })).toHaveTextContent('Save');
+  });
+
   it('renders a link with href', () => {
     render(<IconButton icon={<BookmarkIcon />} label="Open bookmarks" href="/bookmarks" />);
     expect(screen.getByRole('link', { name: 'Open bookmarks' })).toHaveAttribute('href', '/bookmarks');

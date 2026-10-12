@@ -30,6 +30,17 @@ interface IconButtonOwnProps {
    * pressed / not pressed. Omit for plain action buttons.
    */
   pressed?: boolean;
+  /**
+   * Short visible text under the icon. It repeats `label` visually, so it is
+   * hidden from assistive technology. Revealed on hover and keyboard focus
+   * unless `captionAlways` is set. Replaces the legacy `IconRevealButton`.
+   */
+  caption?: string;
+  /**
+   * Keep the caption visible instead of revealing it on hover/focus.
+   * @default false
+   */
+  captionAlways?: boolean;
 }
 
 export type IconButtonProps = IconButtonOwnProps &
@@ -79,6 +90,26 @@ const useStyles = makeStyles({
     ':hover': { backgroundColor: 'color-mix(in srgb, ' + vars.color.bgOverlay + ' 90%, transparent)', color: vars.color.textOverlay },
   },
   pressed: { color: vars.color.accentRed, ':hover': { color: vars.color.accentRed } },
+  withCaption: {
+    borderRadius: '4px',
+    flexDirection: 'column',
+    height: 'auto',
+    rowGap: '6px',
+    paddingTop: '8px',
+    paddingBottom: '8px',
+    ':hover': { '--dp-caption-opacity': '1' },
+    ':focus-visible': { '--dp-caption-opacity': '1' },
+  },
+  caption: {
+    fontSize: vars.fontSize.uppercase,
+    fontWeight: vars.fontWeight.medium,
+    letterSpacing: '0.6px',
+    opacity: 'var(--dp-caption-opacity, 0)',
+    textTransform: 'uppercase',
+    transitionProperty: 'opacity',
+    transitionDuration: vars.duration.fast,
+  },
+  captionAlways: { opacity: 1 },
 });
 
 /**
@@ -90,7 +121,7 @@ const useStyles = makeStyles({
  * <IconButton icon={<BookmarkIcon />} label="Save to trip" pressed={saved} onClick={toggle} />
  */
 export const IconButton = React.forwardRef<HTMLElement, IconButtonProps>(function IconButton(
-  { icon, label, size = 40, variant = 'plain', pressed, className, style, ...rest },
+  { icon, label, size = 40, variant = 'plain', pressed, caption, captionAlways = false, className, style, ...rest },
   ref,
 ) {
   const s = useStyles();
@@ -99,9 +130,20 @@ export const IconButton = React.forwardRef<HTMLElement, IconButtonProps>(functio
     variant === 'filled' && s.filled,
     variant === 'overlay' && s.overlay,
     pressed && s.pressed,
+    caption && s.withCaption,
     className,
   );
-  const dims = { width: size, height: size, fontSize: FONT[size], ...style };
+  const dims = { width: size, ...(caption ? {} : { height: size }), fontSize: FONT[size], ...style };
+  const content = (
+    <>
+      {icon}
+      {caption && (
+        <span aria-hidden="true" className={mergeClasses(s.caption, captionAlways && s.captionAlways)}>
+          {caption}
+        </span>
+      )}
+    </>
+  );
 
   if (rest.href !== undefined) {
     return (
@@ -112,7 +154,7 @@ export const IconButton = React.forwardRef<HTMLElement, IconButtonProps>(functio
         style={dims}
         {...(rest as React.AnchorHTMLAttributes<HTMLAnchorElement>)}
       >
-        {icon}
+        {content}
       </a>
     );
   }
@@ -126,7 +168,7 @@ export const IconButton = React.forwardRef<HTMLElement, IconButtonProps>(functio
       style={dims}
       {...(rest as React.ButtonHTMLAttributes<HTMLButtonElement>)}
     >
-      {icon}
+      {content}
     </button>
   );
 });

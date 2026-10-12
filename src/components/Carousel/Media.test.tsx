@@ -20,7 +20,7 @@ describe('Carousel', () => {
     );
     const region = screen.getByRole('region', { name: 'Featured guides' });
     expect(region).toHaveAttribute('aria-roledescription', 'carousel');
-    const slides = screen.getAllByRole('group');
+    const slides = screen.getAllByRole('group').filter((el) => el.getAttribute('aria-roledescription') === 'slide');
     expect(slides).toHaveLength(3);
     expect(slides[1]).toHaveAttribute('aria-label', '2 of 3');
     expect(slides[1]).toHaveAttribute('aria-roledescription', 'slide');
@@ -36,7 +36,7 @@ describe('Carousel', () => {
         <p>Two</p>
       </Carousel>,
     );
-    const list = screen.getByRole('list');
+    const list = screen.getByRole('group', { name: 'Guides slides' });
     const scrollBy = vi.fn();
     list.scrollBy = scrollBy as unknown as typeof list.scrollBy;
     expect(screen.getByRole('button', { name: 'Previous slides' })).toBeDisabled();

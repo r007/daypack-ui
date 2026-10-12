@@ -11,7 +11,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const cell = { background: '#88bde7', color: '#fff', padding: 16, fontFamily: 'system-ui', textAlign: 'center' } as const;
+const cell = { background: '#88bde7', color: '#2c3643', padding: 16, fontFamily: 'system-ui', textAlign: 'center' } as const;
 
 /** Gutters sit *before* each column, so leave the first one off to fill the 12 columns exactly. */
 export const Responsive: Story = {

@@ -26,7 +26,7 @@ export interface TimestampProps extends Omit<React.TimeHTMLAttributes<HTMLTimeEl
 }
 
 const useStyles = makeStyles({
-  root: { ...typography.uppercase(), color: vars.color.accentGray },
+  root: { ...typography.uppercase(), color: vars.color.textLight },
 });
 
 const UNITS: [Intl.RelativeTimeFormatUnit, number][] = [

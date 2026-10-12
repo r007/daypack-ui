@@ -4,7 +4,7 @@ import { vars, cssVarName } from './vars';
 
 describe('theme', () => {
   it('vars carry a fallback value', () => {
-    expect(vars.color.linkPrimary).toBe('var(--dp-color-link-primary, #297cbb)');
+    expect(vars.color.linkPrimary).toBe('var(--dp-color-link-primary, #2979b7)');
   });
 
   it('ThemeProvider sets CSS custom properties', () => {

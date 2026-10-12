@@ -109,7 +109,7 @@ const useStyles = makeStyles({
     ':hover': { backgroundColor: vars.color.bgSecondary },
     ':focus-visible': focusRing,
   },
-  outside: { color: vars.color.accentGray },
+  outside: { color: vars.color.textLight },
   today: { fontWeight: 700, textDecorationLine: 'underline' },
   inRange: { backgroundColor: vars.color.bgSecondary, borderRadius: 0 },
   selected: { backgroundColor: vars.color.linkPrimary, color: vars.color.textOverlay, ':hover': { backgroundColor: vars.color.linkPrimary } },

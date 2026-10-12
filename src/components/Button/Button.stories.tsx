@@ -32,10 +32,17 @@ export const Sizes: Story = {
 
 export const Colors: Story = {
   render: (args) => (
-    <div style={{ display: 'flex', gap: 12, padding: 16, background: '#555' }}>
-      {(['blue', 'white', 'gray', 'red', 'transparent'] as const).map((color) => (
-        <Button key={color} {...args} color={color} border>{color}</Button>
-      ))}
+    <div style={{ display: 'grid', gap: 16 }}>
+      <div style={{ display: 'flex', gap: 12 }}>
+        {(['blue', 'gray', 'red'] as const).map((color) => (
+          <Button key={color} {...args} color={color} border>{color}</Button>
+        ))}
+      </div>
+      <div style={{ display: 'flex', gap: 12, padding: 16, background: '#2c3643' }}>
+        {(['white', 'transparent'] as const).map((color) => (
+          <Button key={color} {...args} color={color} border>{color}</Button>
+        ))}
+      </div>
     </div>
   ),
 };

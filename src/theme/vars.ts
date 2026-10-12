@@ -11,7 +11,7 @@ export const cssVarName = (group: string, key: string) =>
 type VarMap = { [G in keyof Tokens]: { [K in keyof Tokens[G]]: string } };
 
 /**
- * `vars.color.linkPrimary` === `var(--dp-color-link-primary, #297cbb)`.
+ * `vars.color.linkPrimary` === `var(--dp-color-link-primary, #2979b7)`.
  * Components use these in Griffel styles, so they work with or without a
  * <ThemeProvider> and can be re-themed at any DOM level.
  */

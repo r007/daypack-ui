@@ -30,7 +30,7 @@ const thumb = {
 const useStyles = makeStyles({
   single: {
     appearance: 'none',
-    background: 'linear-gradient(to right, var(--dp-slider-fill, #297cbb) var(--dp-slider-pct, 0%), var(--dp-slider-track, #e4e4e4) var(--dp-slider-pct, 0%))',
+    background: 'linear-gradient(to right, var(--dp-slider-fill, #2979b7) var(--dp-slider-pct, 0%), var(--dp-slider-track, #e4e4e4) var(--dp-slider-pct, 0%))',
     borderRadius: '2px',
     height: '4px',
     margin: '10px 0',

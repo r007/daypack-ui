@@ -23,7 +23,8 @@ const useStyles = makeStyles({
   root: { ...typography.uppercase(), display: 'inline-block', letterSpacing: '0.6px' },
   neutral: { color: vars.color.textLight },
   accent: { color: vars.color.linkPrimary },
-  success: { color: vars.color.accentGreen },
+  // The brand green is too light for text (2.1:1); darken it to clear AA.
+  success: { color: `color-mix(in srgb, ${vars.color.accentGreen} 55%, black)` },
   alert: { color: vars.color.accentRed },
 });
 

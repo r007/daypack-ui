@@ -77,3 +77,4 @@ export * from './components/Field';
 export * from './components/NumberInput';
 export * from './components/SettingRow';
 export * from './components/Slider';
+export * from './components/Map';

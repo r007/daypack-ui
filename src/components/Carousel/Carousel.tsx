@@ -48,7 +48,6 @@ const useStyles = makeStyles({
   list: {
     columnGap: 'var(--dp-carousel-gap)',
     display: 'flex',
-    listStyleType: 'none',
     margin: 0,
     overflowX: 'auto',
     overflowY: 'hidden',
@@ -128,7 +127,7 @@ export function Carousel({
   ...rest
 }: CarouselProps) {
   const s = useStyles();
-  const listRef = React.useRef<HTMLUListElement>(null);
+  const listRef = React.useRef<HTMLDivElement>(null);
   const slides = React.Children.toArray(children).filter(Boolean);
   const [index, setIndex] = React.useState(0);
   const [atStart, setAtStart] = React.useState(true);
@@ -191,9 +190,9 @@ export function Carousel({
       style={{ ...cssVars, ...style }}
       {...rest}
     >
-      <ul ref={listRef} tabIndex={0} className={s.list} onScroll={measure} aria-label={`${label} slides`}>
+      <div ref={listRef} role="group" tabIndex={0} className={s.list} onScroll={measure} aria-label={`${label} slides`}>
         {slides.map((slide, i) => (
-          <li
+          <div
             key={i}
             role="group"
             aria-roledescription="slide"
@@ -201,9 +200,9 @@ export function Carousel({
             className={mergeClasses(s.slide, s.perBase, s.perMd, s.perLg)}
           >
             {slide}
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
       {(controls || showCounter) && (
         <div className={s.footer}>
           {showCounter && (

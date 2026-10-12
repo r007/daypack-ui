@@ -29,7 +29,7 @@ export interface BreadcrumbsProps extends Omit<React.HTMLAttributes<HTMLElement>
 const useStyles = makeStyles({
   list: {
     alignItems: 'center',
-    color: 'color-mix(in srgb, ' + vars.color.textPrimary + ' 56%, transparent)',
+    color: vars.color.textLight, // AA on white (the original 56% alpha was 3.3:1)
     display: 'flex',
     flexWrap: 'wrap',
     fontFamily: vars.font.sans,
