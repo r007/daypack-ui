@@ -5,6 +5,7 @@ import { media } from '../../theme/media';
 import { focusRing } from '../../theme/focus';
 import { typography } from '../../theme/typography';
 import { CloseIcon } from '../Icon/icons';
+import { lockScroll, unlockScroll } from '../_internal/scrollLock';
 
 export interface DialogProps extends Omit<React.DialogHTMLAttributes<HTMLDialogElement>, 'open' | 'title' | 'onClose' | 'role'> {
   /** Whether the dialog is shown. You own this state; update it in `onClose`. */
@@ -132,15 +133,6 @@ const useStyles = makeStyles({
     ':focus-visible': focusRing,
   },
 });
-
-// Several dialogs may be open at once; lock the page scroll until all close.
-let scrollLocks = 0;
-function lockScroll() {
-  if (scrollLocks++ === 0) document.documentElement.style.overflow = 'hidden';
-}
-function unlockScroll() {
-  if (--scrollLocks === 0) document.documentElement.style.overflow = '';
-}
 
 /**
  * Modal dialog on the native `<dialog>` element: focus is trapped and
