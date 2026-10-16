@@ -6,6 +6,8 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-10-17
+
 ### Added
 - Project foundations: Vite library build, TypeScript, Griffel, Vitest, Storybook, GitHub Actions (CI + Pages).
 - Design tokens and CSS-variable theming (`vars`, `ThemeProvider`); style utilities `typography`, `media`, `blueLink`, `underlinedLink`, `visuallyHidden`, `focusRing`.

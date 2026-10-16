@@ -1,5 +1,10 @@
 # daypack-ui
 
+[![CI](https://github.com/r007/daypack-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/r007/daypack-ui/actions/workflows/ci.yml)
+[![npm](https://img.shields.io/npm/v/daypack-ui)](https://www.npmjs.com/package/daypack-ui)
+[![license](https://img.shields.io/npm/l/daypack-ui)](LICENSE)
+[![Storybook](https://img.shields.io/badge/storybook-docs-ff4785)](https://r007.github.io/daypack-ui/)
+
 A React + TypeScript component library built on [Griffel](https://griffel.js.org/)
 (atomic CSS-in-JS) and CSS-variable theming. Accessible by default, native-first
 and light on dependencies.
@@ -59,7 +64,8 @@ export function Example() {
 | Overlays & feedback | `Dialog`, `Popover`, `Tooltip`, `Toast`/`useToast`, `Banner`, `DotLoader`, `Spinner`, `EmptyState` |
 | Media | `Image`, `Carousel`, `PhotoGallery`/`Lightbox`, `Video`, `StaticMap`, `InteractiveMap`, `MapMarker`, `Icon` (139 icons) |
 
-Browse them, with controls and props tables, in Storybook (`pnpm dev`).
+Browse them, with controls and props tables, in the
+[live Storybook](https://r007.github.io/daypack-ui/) (or locally with `pnpm dev`).
 
 ## Theming
 

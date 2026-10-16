@@ -1,8 +1,35 @@
 {
   "name": "daypack-ui",
   "version": "0.1.0",
-  "description": "A React + TypeScript component library with Griffel styling, derived from the original Backpack UI design.",
+  "description": "Accessible React + TypeScript component library with Griffel styling and CSS-variable theming. ~90 components, native-first, light on dependencies.",
   "license": "MIT",
+  "author": "r007 (https://github.com/r007)",
+  "homepage": "https://r007.github.io/daypack-ui/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/r007/daypack-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/r007/daypack-ui/issues"
+  },
+  "keywords": [
+    "react",
+    "react-components",
+    "component-library",
+    "ui-library",
+    "design-system",
+    "typescript",
+    "griffel",
+    "css-in-js",
+    "css-variables",
+    "theming",
+    "accessibility",
+    "a11y",
+    "storybook"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
   "sideEffects": false,
   "files": [
@@ -25,7 +52,8 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "prepublishOnly": "pnpm typecheck && pnpm lint && pnpm test && pnpm build"
   },
   "peerDependencies": {
     "leaflet": "^1.9.0",
